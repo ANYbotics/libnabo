@@ -29,6 +29,10 @@ endif()
 
 else() # ROS version 2
 
+set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-Wall -Wextra -Wpedantic -Werror=return-type)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(PACKAGE_DEPENDENCIES
   Eigen3
   )
@@ -55,8 +59,8 @@ add_library(nabo
 
 target_include_directories(nabo
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/nabo>
-    $<INSTALL_INTERFACE:include/nabo>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
+    $<INSTALL_INTERFACE:include/>
   )
 
 target_link_libraries(nabo
