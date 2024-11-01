@@ -76,7 +76,12 @@ target_compile_options(nabo PRIVATE
   "$<$<NOT:$<CONFIG:Debug>>:-O3>"
   )
 
-ament_target_dependencies(nabo ${PACKAGE_DEPENDENCIES})
+set_target_properties(nabo
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE ON
+  )
+
+  ament_target_dependencies(nabo ${PACKAGE_DEPENDENCIES})
 
 #############
 ## Install ##
