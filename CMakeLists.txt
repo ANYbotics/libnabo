@@ -81,7 +81,7 @@ set_target_properties(nabo
     POSITION_INDEPENDENT_CODE ON
   )
 
-  ament_target_dependencies(nabo ${PACKAGE_DEPENDENCIES})
+ament_target_dependencies(nabo ${PACKAGE_DEPENDENCIES})
 
 #############
 ## Install ##
