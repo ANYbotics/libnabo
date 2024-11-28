@@ -132,8 +132,6 @@ namespace Nabo
 		inline uint32_t getChildBucketSize(const uint32_t dimChildBucketSize) const
 		{ return dimChildBucketSize >> dimBitCount; }
 		
-		struct BucketEntry;
-		
 		//! search node
 		struct Node
 		{
@@ -154,32 +152,17 @@ namespace Nabo
 		//! dense vector of search nodes, provides better memory performances than many small objects
 		typedef std::vector<Node> Nodes;
 		
-		//! entry in a bucket
-		struct BucketEntry
-		{
-			const T* pt; //!< pointer to first value of point data, 0 if end of bucket
-			Index index; //!< index of point
-			
-			//! create a new bucket entry for a point in the data
-			/** \param pt pointer to first component of the point, components must be continuous
-			 * \param index index of the point in the data
-			 */
-			BucketEntry(const T* pt = 0, const Index index = 0): pt(pt), index(index) {}
-		};
-		
-		//! bucket data
-		typedef std::vector<BucketEntry> Buckets;
-		
 		//! search nodes
 		Nodes nodes;
 		
 		//! buckets
-		Buckets buckets;
+		BuildPoints buckets;
 		
 		//! return the bounds of points from [first..last[ on dimension dim
 		std::pair<T,T> getBounds(const BuildPointsIt first, const BuildPointsIt last, const unsigned dim);
+
 		//! construct nodes for points [first..last[ inside the hyperrectangle [minValues..maxValues]
-		unsigned buildNodes(const BuildPointsIt first, const BuildPointsIt last, const Vector minValues, const Vector maxValues);
+		unsigned buildNodes(BuildPointsIt first, BuildPointsIt last);
 		
 		//! search one point, call recurseKnn with the correct template parameters
 		/** \param query pointer to query coordinates 

@@ -277,9 +277,9 @@ namespace Nabo
 		//! creation options
 		const unsigned creationOptionFlags;
 		//! the low bound of the search space (axis-aligned bounding box)
-		const Vector minBound;
+		Vector minBound;
 		//! the high bound of the search space (axis-aligned bounding box)
-		const Vector maxBound;
+		Vector maxBound;
 
 		//! the invalid index
 		static constexpr Index InvalidIndex = invalidIndex<Index>();
