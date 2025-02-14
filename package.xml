@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <package format="3">
   <name>libnabo</name>
-  <version>1.0.30</version>
+  <version>1.0.31</version>
   <description>libnabo is a fast K Nearest Neighbour library for low-dimensional spaces.</description>
 
   <maintainer email="ynava@anybotics.com">Yoshua Nava</maintainer>
