@@ -12,15 +12,6 @@ find_package(catkin REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED COMPONENTS python)
 
-set(USE_OPENMP FALSE CACHE BOOL "Set to FALSE to not use OpenMP")
-if(USE_OPENMP)
-  find_package(OpenMP REQUIRED)
-  if (OpenMP_FOUND)
-    add_compile_options("${OpenMP_CXX_FLAGS}")
-    add_definitions(-DHAVE_OPENMP=${OpenMP_FOUND})
-  endif()
-endif(USE_OPENMP)
-
 # Catkin package macro
 catkin_package(
   INCLUDE_DIRS
@@ -49,13 +40,11 @@ target_include_directories(nabo
   SYSTEM
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
-    ${OpenMP_CXX_INCLUDE_DIRS}
 )
 
 target_link_libraries(nabo
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
-  ${OpenMP_CXX_LIBRARIES}
 )
 
 #############

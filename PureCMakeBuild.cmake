@@ -86,19 +86,6 @@ else ()
 	set (CMAKE_CXX_STANDARD 11)
 endif ()
 
-# openmp
-set(USE_OPEN_MP TRUE CACHE BOOL "Set to FALSE to not use OpenMP")
-if (USE_OPEN_MP)
-	find_package(OpenMP)
-	if (OPENMP_FOUND)
-		add_definitions(-fopenmp -DHAVE_OPENMP)
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-		if (CMAKE_COMPILER_IS_GNUCC)
-			set(EXTRA_LIBS ${EXTRA_LIBS} gomp)
-		endif(CMAKE_COMPILER_IS_GNUCC)
-	endif(OPENMP_FOUND)
-endif (USE_OPEN_MP)
-
 # eigen 2 or 3
 find_path(EIGEN_INCLUDE_DIR Eigen/Core
 	/usr/local/include/eigen3

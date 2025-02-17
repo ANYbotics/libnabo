@@ -37,9 +37,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <queue>
 #include <algorithm>
 #include <utility>
-#ifdef HAVE_OPENMP
-#include <omp.h>
-#endif
 
 /*!	\file kdtree_cpu.cpp
 	\brief kd-tree search, cpu implementation
@@ -336,18 +333,14 @@ namespace Nabo
 		IndexMatrix result(k, query.cols());
 		unsigned long leafTouchedCount(0);
 
-#pragma omp parallel 
-		{		
-
 		Heap heap(k);
 		std::vector<T> off(dim, 0);
 
-#pragma omp for reduction(+:leafTouchedCount) schedule(guided,32)
 		for (int i = 0; i < colCount; ++i)
 		{
 			leafTouchedCount += onePointKnn(query, indices, dists2, i, heap, off, maxError2, maxRadius2, allowSelfMatch, collectStatistics, sortResults);
 		}
-		}
+
 		return leafTouchedCount;
 	}
 	
@@ -366,20 +359,16 @@ namespace Nabo
 		IndexMatrix result(k, query.cols());
 		unsigned long leafTouchedCount(0);
 
-#pragma omp parallel 
-		{		
-
 		Heap heap(k);
 		std::vector<T> off(dim, 0);
 		
-#pragma omp for reduction(+:leafTouchedCount) schedule(guided,32)
 		for (int i = 0; i < colCount; ++i)
 		{
 			const T maxRadius(maxRadii[i]);
 			const T maxRadius2(maxRadius * maxRadius);
 			leafTouchedCount += onePointKnn(query, indices, dists2, i, heap, off, maxError2, maxRadius2, allowSelfMatch, collectStatistics, sortResults);
 		}
-		}
+
 		return leafTouchedCount;
 	}
 	

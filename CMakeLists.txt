@@ -43,10 +43,6 @@ foreach(PKG ${PACKAGE_DEPENDENCIES})
   find_package(${PKG} REQUIRED)
 endforeach()
 
-if(USE_OPENMP)
-  message(FATAL_ERROR "We are not going to build with openmp on colcon.")
-endif(USE_OPENMP)
-
 ########################
 ## Library definition ##
 ########################
