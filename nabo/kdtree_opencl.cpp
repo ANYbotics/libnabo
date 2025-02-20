@@ -411,18 +411,9 @@ namespace Nabo
 	BruteForceSearchOpenCL<T, CloudType>::BruteForceSearchOpenCL(const CloudType& cloud, const Index dim, const unsigned creationOptionFlags, const cl_device_type deviceType):
 	OpenCLSearch<T, CloudType>::OpenCLSearch(cloud, dim, creationOptionFlags, deviceType)
 	{
-#ifdef EIGEN3_API
 		const_cast<Vector&>(this->minBound) = cloud.topRows(this->dim).rowwise().minCoeff();
 		const_cast<Vector&>(this->maxBound) = cloud.topRows(this->dim).rowwise().maxCoeff();
-#else // EIGEN3_API
-		// compute bounds
-		for (int i = 0; i < cloud.cols(); ++i)
-		{
-			const Vector& v(cloud.block(0,i,this->dim,1));
-			const_cast<Vector&>(this->minBound) = this->minBound.cwise().min(v);
-			const_cast<Vector&>(this->maxBound) = this->maxBound.cwise().max(v);
-		}
-#endif // EIGEN3_API
+
 		// init openCL
 		initOpenCL("knn_bf.cl", "knnBruteForce");
 	}
@@ -526,13 +517,9 @@ namespace Nabo
 		{
 			const Vector& v(cloud.block(0,i,this->dim,1));
 			buildPoints.push_back(BuildPoint(v, i));
-#ifdef EIGEN3_API
+
 			const_cast<Vector&>(minBound) = minBound.array().min(v.array());
 			const_cast<Vector&>(maxBound) = maxBound.array().max(v.array());
-#else // EIGEN3_API
-			const_cast<Vector&>(minBound) = minBound.cwise().min(v);
-			const_cast<Vector&>(maxBound) = maxBound.cwise().max(v);
-#endif // EIGEN3_API
 		}
 		
 		// create nodes
@@ -653,13 +640,9 @@ namespace Nabo
 		{
 			buildPoints.push_back(i);
 			const Vector& v(cloud.block(0,i,this->dim,1));
-#ifdef EIGEN3_API
+
 			const_cast<Vector&>(minBound) = minBound.array().min(v.array());
 			const_cast<Vector&>(maxBound) = maxBound.array().max(v.array());
-#else // EIGEN3_API
-			const_cast<Vector&>(minBound) = minBound.cwise().min(v);
-			const_cast<Vector&>(maxBound) = maxBound.cwise().max(v);
-#endif // EIGEN3_API
 		}
 		
 		// create nodes

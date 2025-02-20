@@ -33,12 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define __NABO_H
 
 #include "Eigen/Core"
-#if EIGEN_VERSION_AT_LEAST(2,92,0)
-	#define EIGEN3_API
-#endif
-#ifndef EIGEN3_API
-	#include "Eigen/Array"
-#endif
+
 #include <vector>
 #include <map>
 #include "third_party/any.hpp"

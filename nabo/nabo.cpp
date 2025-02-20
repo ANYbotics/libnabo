@@ -82,11 +82,8 @@ namespace Nabo
 	template<typename T, typename CloudType>
 	unsigned long NearestNeighbourSearch<T, CloudType>::knn(const Vector& query, IndexVector& indices, Vector& dists2, const Index k, const T epsilon, const unsigned optionFlags, const T maxRadius) const
 	{
-#ifdef EIGEN3_API
 		const Eigen::Map<const Matrix> queryMatrix(&query.coeff(0,0), dim, 1);
-#else // EIGEN3_API
-		const Eigen::Map<Matrix> queryMatrix(&query.coeff(0,0), dim, 1);
-#endif // EIGEN3_API
+
 		// note: this is inefficient, because we copy memory, due to the template-
 		// based abstraction of Eigen. High-performance implementation should
 		// take care of knnM and then implement knn on top of it.
