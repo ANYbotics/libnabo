@@ -4,8 +4,8 @@
   <version>1.0.31</version>
   <description>libnabo is a fast K Nearest Neighbour library for low-dimensional spaces.</description>
 
-  <maintainer email="ynava@anybotics.com">Yoshua Nava</maintainer>
-  <maintainer email="mwulf@anybotics.com">Maximilian Wulf</maintainer>
+  <maintainer email="magostinucci@anybotics.com">Mathieu Agostinucci</maintainer>
+  <maintainer email="gzhou@anybotics.com">Guoxiang Zhou</maintainer>
   <license>BSD</license>
   <url type="repository">https://github.com/anybotics/libnabo</url>
   <author email="stephane.magnenat@mavt.ethz.ch">Stéphane Magnenat</author>
@@ -13,7 +13,7 @@
   <!-- If a pure-cmake build is desired, the buildtool should be switched to 'cmake' -->
   <!-- On the other hand, if a catkin build is desired, the build tool depend should be 'catkin' -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
-  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>  
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 <!--   <build_depend condition="$ROS_VERSION == 1">cmake_clang_tools</build_depend> -->
 
   <build_depend condition="$ROS_VERSION == 1">boost</build_depend>
